@@ -1,8 +1,11 @@
+const DataBaseManager = require('../../../core/database/DataBaseManager');
+
 class UserReader {
     
-    static getAllUsers() {
-     const query = 'select * from web.users;';
-     return query;
+    static async getAllUsers() {
+     const query = 'select * from poll.users;';
+     const result = await DataBaseManager.query(query);
+     return result;
     }
 }
 

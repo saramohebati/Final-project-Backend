@@ -2,8 +2,8 @@ const UserReader = require('./model/read')
 
 class UserController {
     
- static getAllUsers(req, res, next){
-    const users = UserReader.getAllUsers();
+ static async getAllUsers(req, res, next){
+    const users = await UserReader.getAllUsers();
     res.send(users);
  }
 }
