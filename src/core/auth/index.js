@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {jwt: jwt_config} = require('../../config')
+const { jwt: jwt_config } = require('../../config')
 
 class AuthenticationManager {
     static getJwtToken(payload) {
@@ -12,6 +12,10 @@ class AuthenticationManager {
             token,
             expirySecond
         };
+    }
+
+    static getJwtTokenPayload(token) {
+        return jwt.verify(token, jwt_config.secret);
     }
 }
 

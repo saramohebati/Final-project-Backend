@@ -8,22 +8,37 @@ class AuthMiddleware {
             const { email, password } = req.body;
             const user = await UserReader.getUsersByEmailAndPassword(email, password);
             if (!user) {
-                res.statuse(401).end();
+                res.status(401).end();
             } else {
-              const payload = {
-                id: user.id,
-                email: user.email,
-            };
-            const jwt = AuthenticationManager.getJwtToken(payload);
-            res.cookie('token', jwt.token, {
-                httpOnly: true,
-                maxAge: jwt.expirySecond * 1000
-            }).end();
-            }  
+                const payload = {
+                    id: user.id,
+                    email: user.email,
+                };
+                const jwt = AuthenticationManager.getJwtToken(payload);
+                res.cookie('token', jwt.token, {
+                    httpOnly: true,
+                    maxAge: jwt.expirySecond * 1000
+                }).end();
+            }
         } catch (error) {
-            res.statuse(500).send(error.message);
+            res.status(500).send(error.message);
         }
+    }
 
+    static jwtTokenValidation(req, res, next) {
+        try {
+            const jwtToken = req.cookies.token;
+            if (!jwtToken) {
+                throw new Error("Token not exists!");
+            }
+
+            const payload = AuthenticationManager.getJwtTokenPayload(jwtToken);
+            req.jwt_payload = payload;
+
+            next();
+        } catch (error) {
+            res.status(401).end();
+        }
     }
 }
 
