@@ -16,14 +16,14 @@ class UserReader {
         return DataBaseManager.query(query);
     }
 
-    static async getUsersByEmailAndPassword(email, pasword) {
+    static async getUsersByEmailAndPassword(email, password) {
         const query = `
         select * 
         from users
         where 
               email = '${email}'
         and
-              pasword = '${pasword}';
+              password = '${password}';
         `;
         const dbResult = await DataBaseManager.query(query);
         return dbResult[0];
