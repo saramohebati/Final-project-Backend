@@ -5,8 +5,8 @@ class AuthMiddleware {
 
     static async login(req, res, next) {
         try {
-            const { email, password } = req.body;
-            const user = await UserReader.getUsersByEmailAndPassword(email, password);
+            const { username, password } = req.body;
+            const user = await UserReader.getUsersByEmailAndPassword(username, password);
             if (!user) {
                 res.status(401).end();
             } else {
