@@ -1,23 +1,22 @@
-const DataBaseManager = require('../../../core/database/DataBaseManager');
+const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class UserReader {
-
-    static async getAllUsers() {
-        const query = 'select * from poll.users;';
-        const result = await DataBaseManager.query(query);
-        return result;
-    }
-    static async getUserById(userId) {
-        const query = `
+  static async getAllUsers() {
+    const query = "select * from poll.users;";
+    const result = await DataBaseManager.query(query);
+    return result;
+  }
+  static async getUserById(userId) {
+    const query = `
         select *
         from poll.users
         where id = ${userId}
         `;
-        return DataBaseManager.query(query);
-    }
+    return DataBaseManager.query(query);
+  }
 
-    static async getUsersByEmailAndPassword(username, password) {
-        const query = `
+  static async getUsersByUsernameAndPassword(username, password) {
+    const query = `
         select * 
         from users
         where 
@@ -25,9 +24,9 @@ class UserReader {
         and
               password = '${password}';
         `;
-        const dbResult = await DataBaseManager.query(query);
-        return dbResult[0];
-    }
+    const dbResult = await DataBaseManager.query(query);
+    return dbResult[0];
+  }
 }
 
-module.exports = UserReader; 
+module.exports = UserReader;

@@ -1,45 +1,54 @@
-const UserReader = require('../../module/users/model/read');
-const AuthenticationManager = require("../auth")
+const UserReader = require("../../module/users/model/read");
+const AuthenticationManager = require("../auth");
 
 class AuthMiddleware {
-
-    static async login(req, res, next) {
-        try {
-            const { username, password } = req.body;
-            const user = await UserReader.getUsersByEmailAndPassword(username, password);
-            if (!user) {
-                res.status(401).end();
-            } else {
-                const payload = {
-                    id: user.id,
-                    email: user.email,
-                };
-                const jwt = AuthenticationManager.getJwtToken(payload);
-                res.cookie('token', jwt.token, {
-                    httpOnly: true,
-                    maxAge: jwt.expirySecond * 1000
-                }).end();
-            }
-        } catch (error) {
-            res.status(500).send(error.message);
-        }
+  static async login(req, res, next) {
+    try {
+      const { username, password } = req.body;
+      const user = await UserReader.getUsersByUsernameAndPassword(
+        username,
+        password
+      );
+      if (!user) {
+        res.status(401).end();
+      } else {
+        const payload = {
+          id: user.id,
+          email: user.email,
+        };
+        const jwt = AuthenticationManager.getJwtToken(payload);
+        res.send(jwt);
+      }
+    } catch (error) {
+      res.status(500).send(error.message);
     }
+  }
 
-    static jwtTokenValidation(req, res, next) {
-        try {
-            const jwtToken = req.cookies.token;
-            if (!jwtToken) {
-                throw new Error("Token not exists!");
-            }
+  static jwtTokenValidation(req, res, next) {
+    try {
+      const jwtToken = AuthMiddleware.parseAuthorizationToken(
+        req.headers.authorization
+      );
+      if (!jwtToken) {
+        throw new Error("Token not exists!");
+      }
 
-            const payload = AuthenticationManager.getJwtTokenPayload(jwtToken);
-            req.jwt_payload = payload;
+      const payload = AuthenticationManager.getJwtTokenPayload(jwtToken);
+      req.jwt_payload = payload;
 
-            next();
-        } catch (error) {
-            res.status(401).end();
-        }
+      next();
+    } catch (error) {
+      res.status(401).end();
     }
+  }
+
+  static parseAuthorizationToken(authorization) {
+    if (!authorization) {
+      throw new Error("Authorization Token not found!");
+    }
+    const bearer = authorization.split(" ");
+    return bearer[1];
+  }
 }
 
-module.exports = AuthMiddleware
+module.exports = AuthMiddleware;
