@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
+
 const userRouter = require('./src/module/users/router.js');
+const pollRouter = require('./src/module/poll/router.js');
 const AuthMiddleware = require('./src/core/middleware/auth');
 
 var app = express();
@@ -18,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({origin: ["http://localhost:3000"]}));
 
 app.use('/users', userRouter);
+app.use('/poll', pollRouter);
 app.post('/login', AuthMiddleware.login);
+
 
 module.exports = app;
