@@ -13,8 +13,10 @@ class AuthMiddleware {
         res.status(401).end();
       } else {
         const payload = {
-          id: user.id,
-          email: user.email,
+          user: {
+            id: user.id,
+            email: user.email,
+          },
         };
         const jwt = AuthenticationManager.getJwtToken(payload);
         res.send(jwt);
@@ -34,10 +36,11 @@ class AuthMiddleware {
       }
 
       const payload = AuthenticationManager.getJwtTokenPayload(jwtToken);
-      req.jwt_payload = payload;
+      req.loggedInUserData = payload.user;
 
       next();
     } catch (error) {
+      console.error(e);
       res.status(401).end();
     }
   }
