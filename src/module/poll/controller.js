@@ -10,10 +10,8 @@ class PollController {
       const userData = req.body;
       const userId = req.loggedInUserData.id;
       const result = await PollCreator.createPoll(userId, userData);
-      res.send(result);
       res.json(result);
     } catch (error) {
-      res.status(500).send(error.message);
       next(error);
     }
   }
