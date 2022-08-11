@@ -3,28 +3,23 @@ const DatabaseManager = require("../../../core/database/databaseManager");
 class PollReader {
   static async getAllPolls(userId) {
     const query = `
-      SELECT poll.*, COUNT(p.id) as participants, p.name
-      FROM poll LEFT JOIN participant p on poll.id = p.poll_id
-      WHERE poll.user_id = ${userId}
-      GROUP BY p.poll_id;
+    SELECT title, description, link
+    FROM poll 
+    WHERE user_id = ${userId};
     `;
     const result = await DatabaseManager.query(query);
-    return result[0];
+    return result;
   }
 
-  static async getPollById(userId, id) {
-
+  static async getPollById(userId, uuid) {
     const query = `
-      SELECT p.name, i.title, poll.*
-      FROM participant p
-              INNER JOIN participant_choice c on p.id = c.participant_id
-              INNER JOIN poll_item i on c.poll_item_id = i.id
-              INNER JOIN poll poll on i.poll_id = poll.id
-      WHERE poll.id = ${id}
-              AND poll.user_id = ${userId};
+    SELECT title, description, link
+    FROM poll
+    WHERE id = '${uuid}'
+          And user_id = ${userId};
     `;
     const result = await DatabaseManager.query(query);
-    return result[0];
+    return result;
   }
 }
 
