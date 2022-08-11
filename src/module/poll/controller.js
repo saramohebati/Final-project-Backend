@@ -1,9 +1,9 @@
 const PollCreator = require("./model/create");
 const PollReader = require("./model/read");
-
+const PollUpdater = require("./model/update");
 
 class PollController {
-  
+
   static async createPoll(req, res, next) {
     try {
       const userData = req.body;
@@ -33,6 +33,17 @@ class PollController {
       const userId = req.loggedInUserData.id;
       const poll = await PollReader.getPollById(userId, id);
       res.json(poll);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updatePoll(req, res, next) {
+    try {
+      const { id } = req.params;
+      const userData = req.body;
+      const result = await PollUpdater.updatePoll(id, userData);
+      res.json(result);
     } catch (error) {
       next(error);
     }
