@@ -4,7 +4,7 @@ class PollCreator {
     static createPoll(userData) {
         const{userId, title, description, link} = userData;
         const query = `
-        insert into poll.users
+        insert into poll.poll
         (user_id, title, description, link)
         values
         ('${userId}', '${title}', '${description}', '${link}');

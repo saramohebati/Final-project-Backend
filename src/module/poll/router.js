@@ -8,6 +8,7 @@ router.post('/', AuthMiddleware.jwtTokenValidation, PollController.createPoll);
 router.get('/', AuthMiddleware.jwtTokenValidation, PollController.getAllPolls);
 router.get('/:id', AuthMiddleware.jwtTokenValidation, PollController.getPollById);
 router.patch('/:id', AuthMiddleware.jwtTokenValidation, PollController.updatePoll);
+router.delete('/:id', AuthMiddleware.jwtTokenValidation, PollController.removePoll);
 
 
 module.exports = router;

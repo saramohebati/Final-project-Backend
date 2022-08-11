@@ -1,6 +1,7 @@
 const PollCreator = require("./model/create");
 const PollReader = require("./model/read");
 const PollUpdater = require("./model/update");
+const PollRemover = require("./model/delete");
 
 class PollController {
 
@@ -49,6 +50,15 @@ class PollController {
     }
   }
 
+  static async removePoll(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await PollRemover.deletePollById(id);
+      res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = PollController;
