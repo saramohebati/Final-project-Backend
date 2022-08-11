@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const{ errors } = require('celebrate');
 
 
 const userRouter = require('./src/module/users/router.js');
@@ -23,5 +24,6 @@ app.use('/users', userRouter);
 app.use('/poll', pollRouter);
 app.post('/login', AuthMiddleware.login);
 
+app.use(errors());
 
 module.exports = app;
