@@ -9,6 +9,7 @@ const{ errors } = require('celebrate');
 
 const userRouter = require('./src/module/users/router.js');
 const pollRouter = require('./src/module/poll/router.js');
+const itemRouter = require('./src/module/item/router.js');
 const AuthMiddleware = require('./src/core/middleware/auth');
 
 var app = express();
@@ -23,6 +24,7 @@ app.use(cors({origin: ["http://localhost:3000"]}));
 app.use('/users', userRouter);
 app.use('/poll', pollRouter);
 app.post('/login', AuthMiddleware.login);
+app.use('/item', itemRouter);
 
 app.use(errors());
 
