@@ -1,8 +1,10 @@
 const ItemCreator = require("./model/create");
 const ItemReader = require("./model/read");
-const DatabaseManager = require("../../core/database/databaseManager");
+const ItemRemover = require("./model/delete");
+const DatabaseManager = require("../../core/database/DataBaseManager");
 
 class ItemController {
+    
   static async createItem(req, res, next) {
     try {
       const pollItem = req.body;
@@ -37,6 +39,16 @@ class ItemController {
       const { id } = req.params;
       const item = await ItemReader.getItemsById(id);
       res.json(item);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async removeItem(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await ItemRemover.deleteItemById(id);
+      res.json(result);
     } catch (error) {
       next(error);
     }

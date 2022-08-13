@@ -1,7 +1,7 @@
 const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class ItemCreator {
-  static createItem(pollItem) {
+  static async createItem(pollItem) {
     const { pollId, title } = pollItem;
     const query = `
         insert into poll.poll_item
@@ -9,8 +9,9 @@ class ItemCreator {
         values
         ('${pollId}', '${title}');
         `;
-    return DataBaseManager.query(query);
+    const result = await DatabaseManager.query(query);
+    return result;
   }
 }
 
-module.exports = ItemCreator; 
+module.exports = ItemCreator;

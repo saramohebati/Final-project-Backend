@@ -1,4 +1,4 @@
-const DatabaseManager = require("../../../core/database/databaseManager");
+const DatabaseManager = require("../../../core/database/DataBaseManager");
 
 class ItemReader {
   static async getAllItems(id) {
