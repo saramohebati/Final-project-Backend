@@ -1,4 +1,4 @@
-const DatabaseManager = require("../../../core/database/DataBaseManager");
+const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class ItemReader {
   static async getAllItems(id) {
@@ -7,7 +7,7 @@ class ItemReader {
       FROM poll_item
       WHERE poll_id = ${id};
     `;
-    const result = await DatabaseManager.query(query);
+    const result = await DataBaseManager.query(query);
     return result[0];
   }
 
@@ -17,7 +17,7 @@ class ItemReader {
       FROM poll_item
       WHERE id = ${id};
     `;
-    const result = await DatabaseManager.query(query);
+    const result = await DataBaseManager.query(query);
     return result[0];
   }
 }

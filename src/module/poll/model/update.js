@@ -1,4 +1,4 @@
-const DatabaseManager = require("../../../core/database/databaseManager");
+const DataBaseManager = require("../../../core/database/databaseManager");
 
 class PollUpdater {
   static async updatePoll(id, userData) {
@@ -10,7 +10,7 @@ class PollUpdater {
           description = '${description}',
           link = '${link}'
         WHERE id = ${id}`;
-    const result = await DatabaseManager.query(query);
+    const result = await DataBaseManager.query(query);
     return result;
   }
 }

@@ -9,7 +9,7 @@ class ItemCreator {
         values
         ('${pollId}', '${title}');
         `;
-    const result = await DatabaseManager.query(query);
+    const result = await DataBaseManager.query(query);
     return result;
   }
 }
