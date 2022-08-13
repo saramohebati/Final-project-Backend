@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get('/:id',  AuthMiddleware.jwtTokenValidation, ItemController.getAllItems);
 router.get('/id/:id', AuthMiddleware.jwtTokenValidation, ItemController.getItemById);
+router.post('/', AuthMiddleware.jwtTokenValidation, ItemController.createItem);
 
 module.exports = router;
