@@ -1,12 +1,23 @@
 const ParticipantReader = require("./model/read");
+const ParticipantRemover = require('./model/delete');
 
 class ParticipantController {
-    
+
   static async getAllParticipantsByPollId(req, res, next) {
     try {
       const { id } = req.params;
       const items = await ParticipantReader.getAllParticipant(id);
       res.json(items);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async removeParticipants(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await ParticipantRemover.deleteParticipantByPollId(id);
+      res.json(result);
     } catch (error) {
       next(error);
     }
