@@ -4,7 +4,6 @@ const PollUpdater = require("./model/update");
 const PollRemover = require("./model/delete");
 
 class PollController {
-
   static async createPoll(req, res, next) {
     try {
       const userData = req.body;
@@ -28,9 +27,9 @@ class PollController {
 
   static async getPollById(req, res, next) {
     try {
-      const { id } = req.params;
+      const { uuid } = req.params;
       const userId = req.loggedInUserData.id;
-      const poll = await PollReader.getPollById(userId, id);
+      const poll = await PollReader.getPollById(userId, uuid);
       res.json(poll);
     } catch (error) {
       next(error);
@@ -39,9 +38,9 @@ class PollController {
 
   static async updatePoll(req, res, next) {
     try {
-      const { id } = req.params;
+      const { uuid } = req.params;
       const userData = req.body;
-      const result = await PollUpdater.updatePoll(id, userData);
+      const result = await PollUpdater.updatePoll(uuid, userData);
       res.json(result);
     } catch (error) {
       next(error);
@@ -50,8 +49,8 @@ class PollController {
 
   static async removePoll(req, res, next) {
     try {
-      const { id } = req.params;
-      const result = await PollRemover.deletePollById(id);
+      const { uuid } = req.params;
+      const result = await PollRemover.deletePollById(uuid);
       res.json(result);
     } catch (error) {
       next(error);
