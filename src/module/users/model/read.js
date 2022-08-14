@@ -18,7 +18,7 @@ class UserReader {
   static async getUsersByUsernameAndPassword(username, password) {
     const query = `
         select * 
-        from users
+        from poll.users
         where 
               username = '${username}'
         and

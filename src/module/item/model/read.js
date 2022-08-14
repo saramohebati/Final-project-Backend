@@ -4,7 +4,7 @@ class ItemReader {
   static async getAllItems(id) {
     const query = `
       SELECT id, title
-      FROM poll_item
+      FROM poll.poll_item
       WHERE poll_id = ${id};
     `;
     const result = await DataBaseManager.query(query);
@@ -14,7 +14,7 @@ class ItemReader {
   static async getItemsById(id) {
     const query = `
       SELECT title
-      FROM poll_item
+      FROM poll.poll_item
       WHERE id = ${id};
     `;
     const result = await DataBaseManager.query(query);
