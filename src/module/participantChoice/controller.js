@@ -3,7 +3,6 @@ const ChoiceReader = require("./model/read");
 const ChoiceRemover = require("./model/delete");
 
 class ChoiceController {
-  
   static async createChoice(req, res, next) {
     try {
       const choiceData = req.body;

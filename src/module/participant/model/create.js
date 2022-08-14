@@ -7,7 +7,7 @@ class ParticipantCreator {
     insert into poll.participant
       (poll_id, name, email)
       values
-      ('${pollId}', '${name}', '${email}');
+      (${pollId}', '${name}', '${email}');
       `;
     const result = await DataBaseManager.query(query);
     return result;

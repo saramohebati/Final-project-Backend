@@ -1,6 +1,6 @@
 const { celebrate, Joi, Segments } = require("celebrate");
 
-class ItemValidation {
+class ItemValidator {
   static getItemByIdSchema = celebrate({
     [Segments.PARAMS]: Joi.object()
       .keys({
@@ -22,4 +22,4 @@ class ItemValidation {
   });
 }
 
-module.exports = ItemValidation;
+module.exports = ItemValidator;

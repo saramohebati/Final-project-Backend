@@ -1,6 +1,6 @@
 const { celebrate, Joi, Segments } = require("celebrate");
 
-class ParticipantValidation {
+class ParticipantValidator {
   static getParticipantsByIdSchema = celebrate({
     [Segments.PARAMS]: Joi.object()
       .keys({
@@ -14,7 +14,7 @@ class ParticipantValidation {
       .keys({
         poll_id: Joi.number().integer().positive().required(),
         name: Joi.string().required(),
-        name: Joi.string().email().required(),
+        email: Joi.string().email(),
       })
       .required()
       .min(1),
@@ -29,4 +29,4 @@ class ParticipantValidation {
   });
 }
 
-module.exports = ParticipantValidation;
+module.exports = ParticipantValidator;
