@@ -16,7 +16,7 @@ class UserController {
       const result = await UserReader.getUserById(userId);
       res.send(result);
     } catch (error) {
-      res.status(500).send(error.message);
+      next(error);
     }
   }
 
@@ -26,7 +26,7 @@ class UserController {
       const result = await UserCreator.createUser(userData);
       res.send(result);
     } catch (error) {
-      res.status(500).send(error.message);
+      next(error);
     }
   }
 }
