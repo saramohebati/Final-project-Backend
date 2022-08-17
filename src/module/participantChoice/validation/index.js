@@ -12,7 +12,7 @@ class ChoiceValidator {
   static createChoiceSchema = celebrate({
     [Segments.BODY]: Joi.object()
       .keys({
-        participant_id: Joi.number().integer().positive().required,
+        participant_id: Joi.number().integer().positive().required(),
         poll_item_id: Joi.number().integer().positive().required(),
       })
       .required()

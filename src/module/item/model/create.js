@@ -2,12 +2,12 @@ const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class ItemCreator {
   static async createItem(pollItem) {
-    const { pollId, title } = pollItem;
+    const { poll_id, title } = pollItem;
     const query = `
-        insert into poll.poll_item
+        insert into poll_item
         (poll_id, title)
         values
-        ('${pollId}', '${title}');
+        ('${poll_id}', '${title}');
         `;
     const result = await DataBaseManager.query(query);
     return result;

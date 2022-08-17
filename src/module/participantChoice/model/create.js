@@ -2,12 +2,12 @@ const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class ChoiceCreator {
   static async createChoice(choiceData) {
-    const { pollItemId, participantId } = choiceData;
+    const { poll_item_id, participant_id } = choiceData;
     const query = `
-        insert into poll.participant_choice
+        insert into participant_choice
         (poll_item_id, participant_id)
         values
-        ('${pollItemId}', '${participantId}')
+        ('${poll_item_id}', '${participant_id}')
         `;
     const result = await DataBaseManager.query(query);
     return result;

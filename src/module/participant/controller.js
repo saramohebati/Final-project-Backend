@@ -8,7 +8,7 @@ class ParticipantController {
       const participantData = req.body;
       const result = await ParticipantCreator.createParticipant(
         participantData
-      );
+        );
       res.json(result);
     } catch (error) {
       next(error);

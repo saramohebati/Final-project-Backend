@@ -4,12 +4,11 @@ const ItemRemover = require("./model/delete");
 const DataBaseManager = require("../../core/database/DataBaseManager");
 
 class ItemController {
-    
   static async createItem(req, res, next) {
     try {
       const pollItem = req.body;
-      Array.from(pollItem).forEach(async (title) => {
-        await ItemCreator.createItem(title);
+      Array.from(pollItem).forEach(async (poll_item) => {
+        await ItemCreator.createItem(poll_item);
       });
       const pollId = pollItem[0].poll_id;
       const pollQuery = `SELECT id FROM poll WHERE id = ${pollId}`;

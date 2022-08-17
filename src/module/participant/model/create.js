@@ -1,13 +1,13 @@
 const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class ParticipantCreator {
-  static async createParticipant(pollId, participantData) {
-    const { name, email } = participantData;
+  static async createParticipant(participantData) {
+    const { poll_id, name, email } = participantData;
     const query = `
-    insert into poll.participant
+    insert into participant
       (poll_id, name, email)
       values
-      (${pollId}', '${name}', '${email}');
+      ('${poll_id}', '${name}', '${email}');
       `;
     const result = await DataBaseManager.query(query);
     return result;

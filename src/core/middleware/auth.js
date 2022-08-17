@@ -40,7 +40,7 @@ class AuthMiddleware {
 
       next();
     } catch (error) {
-      console.error(e);
+      console.error(error);
       res.status(401).end();
     }
   }

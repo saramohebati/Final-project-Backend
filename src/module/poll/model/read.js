@@ -7,7 +7,7 @@ class PollReader {
     FROM poll 
      LEFT JOIN participant p on poll.id = p.poll_id
     WHERE poll.user_id = ${userId}
-    GROUP BY p.poll_id;
+    GROUP BY poll.id;
     `;
     const result = await DataBaseManager.query(query);
     return result;
@@ -17,7 +17,7 @@ class PollReader {
     const query = `
     SELECT id, title, description, link
     FROM poll
-    WHERE link = '${uuid}'
+    WHERE id = '${uuid}'
           And user_id = ${userId};
     `;
     const result = await DataBaseManager.query(query);

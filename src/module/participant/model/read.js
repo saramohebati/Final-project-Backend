@@ -4,7 +4,7 @@ class ParticipantReader {
   static async getAllParticipant(id) {
     const query = `
       SELECT name
-      FROM poll.participant
+      FROM participant
       WHERE poll_id = ${id};
     `;
     const result = await DataBaseManager.query(query);
