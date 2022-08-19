@@ -4,7 +4,7 @@ class PollRemover {
   static async deletePollById(uuid) {
     const query = `
     DELETE FROM poll
-    WHERE id = ${uuid}`;
+    WHERE link = '${uuid}'`;
     const result = await DataBaseManager.query(query);
     return result;
   }

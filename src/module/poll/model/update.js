@@ -10,7 +10,7 @@ class PollUpdater {
         UPDATE poll
         SET
           ${update.join(",")}
-        WHERE id = ${uuid}
+        WHERE link = '${uuid}'
         `;
     const result = await DataBaseManager.query(query);
     return result;

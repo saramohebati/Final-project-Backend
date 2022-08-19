@@ -15,9 +15,12 @@ class PollReader {
 
   static async getPollById(userId, uuid) {
     const query = `
-    SELECT id, title, description, link
+    SELECT poll.title, poll.description, p.name, i.title, c.poll_item_id
     FROM poll
-    WHERE id = '${uuid}'
+      LEFT JOIN participant p on poll.id = p.poll_id
+      LEFT JOIN participant_choice c on p.id = c.participant_id
+      LEFT JOIN poll_item i on i.id = c.poll_item_id
+    WHERE link = '${uuid}'
           And user_id = ${userId};
     `;
     const result = await DataBaseManager.query(query);
