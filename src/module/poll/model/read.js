@@ -15,11 +15,11 @@ class PollReader {
 
   static async getPollById(userId, uuid) {
     const query = `
-    SELECT poll.title, poll.description, p.name, i.title, c.poll_item_id
+    SELECT poll.title, poll.description, p.name, i.title as poll_item
     FROM poll
       LEFT JOIN participant p on poll.id = p.poll_id
       LEFT JOIN participant_choice c on p.id = c.participant_id
-      LEFT JOIN poll_item i on i.id = c.poll_item_id
+      LEFT JOIN poll_item i on i.poll_id = poll.id
     WHERE link = '${uuid}'
           And user_id = ${userId};
     `;
