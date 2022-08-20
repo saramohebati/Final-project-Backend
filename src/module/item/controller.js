@@ -7,7 +7,7 @@ class ItemController {
   static async createItem(req, res, next) {
     try {
       const pollItem = req.body;
-      Array.from(pollItem).forEach(async (poll_item) => {
+      pollItem.forEach(async (poll_item) => {
         await ItemCreator.createItem(poll_item);
       });
       const pollId = pollItem[0].poll_id;
