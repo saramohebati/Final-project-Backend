@@ -13,8 +13,8 @@ class ItemValidator {
     [Segments.BODY]: Joi.array()
       .items(
         Joi.object().keys({
-          poll_id: Joi.number().integer().positive().required(),
-          title: Joi.string().required(),
+          poll_id: Joi.number().integer().required(),
+          title: Joi.any().required(),
         })
       )
       .required()
