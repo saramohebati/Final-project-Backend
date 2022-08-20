@@ -1,4 +1,4 @@
-const DataBaseManager = require("../../../core/database/databaseManager");
+const DataBaseManager = require("../../../core/database/DataBaseManager");
 
 class PollReader {
   static async getAllPolls(userId) {
