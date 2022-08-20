@@ -36,6 +36,15 @@ class PollController {
     }
   }
 
+  static async getPollLink(req, res, next) {
+    try {
+      const { uuid } = res.params;
+      const link = await PollReader.getPollLink(uuid);
+      res.json(link);
+    } catch (error) {
+      next(error);
+    }
+  }
   static async updatePoll(req, res, next) {
     try {
       const { uuid } = req.params;

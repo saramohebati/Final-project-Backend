@@ -26,6 +26,15 @@ class PollReader {
     const result = await DataBaseManager.query(query);
     return result[0];
   }
+  static async getPollLink(uuid) {
+    const query = `
+  SELECT link
+  FROM poll
+  WHERE link = '${uuid}'
+  `;
+    const result = await DataBaseManager.query(query);
+    return result[0];
+  }
 }
 
 module.exports = PollReader;

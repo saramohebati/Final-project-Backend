@@ -10,6 +10,7 @@ router.get('/', AuthMiddleware.jwtTokenValidation, PollController.getAllPolls);
 router.get('/:uuid', PollValidator.getPollByIdSchema, AuthMiddleware.jwtTokenValidation, PollController.getPollById);
 router.patch('/:uuid', PollValidator.updatePollSchema, AuthMiddleware.jwtTokenValidation, PollController.updatePoll);
 router.delete('/:uuid', PollValidator.deletePollSchema, AuthMiddleware.jwtTokenValidation, PollController.removePoll);
+router.get('/:uuid', PollValidator.getPollByIdSchema, AuthMiddleware.jwtTokenValidation, PollController.getPollLink);
 
 
 module.exports = router;
