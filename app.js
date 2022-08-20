@@ -22,12 +22,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({ origin: ["http://localhost:3000"] }));
 
-app.use("/users", userRouter);
-app.use("/poll", pollRouter);
-app.post("/login", AuthMiddleware.login);
-app.use("/item", itemRouter);
-app.use("/participant", participantRouter);
-app.use("/choice", choiceRouter);
+app.use("/api/users", userRouter);
+app.use("/api/poll", pollRouter);
+app.post("/api/login", AuthMiddleware.login);
+app.use("/api/item", itemRouter);
+app.use("/api/participant", participantRouter);
+app.use("/api/choice", choiceRouter);
 
 app.use(errors());
 
